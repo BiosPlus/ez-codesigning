@@ -1,0 +1,49 @@
+name: Google Chrome
+on: [push]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  Setup:
+    runs-on: macos-12
+    steps:
+    - name: What arch are we using?
+      - run: sysctl -n machdep.cpu.brand_string
+      - name: Install Brew
+      - run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  Repository_Clone:
+    needs: [Setup]
+    runs-on: macos-12
+    steps:
+      - name: Run install for google chrome
+      - run: |
+            brew reinstall google-chrome
+            ls /Applications/
+
+      - name: Get Codesign
+      - run: |
+          codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
+          cat /tmp/Google\ Chrome.txt
+          echo "Done"
+
+
+
+
+  # microsoftedge:
+  #     needs: [setup, chrome]
+  #     runs-on: macos-12
+
+  #     - name: Run install for Microsoft Edge
+  #       run: |
+  #         brew reinstall microsoft-edge
+  #         ls /Applications/
+
+  #     - name: Get Codesign
+  #       run: |
+  #         codesign -d -r - /Applications/Microsoft\ Edge.app > /tmp/Microsoft\ Edge.txt
+  #         cat /tmp/Microsoft\ Edge.txt
+  #         echo "Done"
+
+
+  
