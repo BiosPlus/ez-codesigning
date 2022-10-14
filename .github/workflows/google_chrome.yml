@@ -2,7 +2,7 @@ name: Google Chrome
 on: [push]
 jobs:
   Setup:
-    runs-on: macos-12
+    runs-on: [macos-12, macos-11]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -14,7 +14,7 @@ jobs:
 
   Google-Chrome-Test:
     needs: [Setup]
-    runs-on: macos-12
+    runs-on: [macos-12, macos-11]
     steps:
       - name: Run install for google chrome
         run: |
@@ -25,10 +25,10 @@ jobs:
           codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
           cat /tmp/Google\ Chrome.txt
           echo "Done"
-          
+
   Microsoft-Edge-Test:
     needs: [Google-Chrome-Test]
-    runs-on: macos-12
+    runs-on: [macos-12, macos-11]
     steps:
       - name: Run install for Microsoft Edge
         run: |
