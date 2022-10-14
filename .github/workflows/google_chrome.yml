@@ -26,23 +26,19 @@ jobs:
           cat /tmp/Google\ Chrome.txt
           echo "Done"
 
+  Microsoft-Edge-Test:
+      needs: [Setup, Google-Chrome-Test]
+      runs-on: macos-12
+      - name: Run install for Microsoft Edge
+        run: |
+          brew reinstall microsoft-edge
+          ls /Applications/
 
-
-
-  # microsoftedge:
-  #     needs: [setup, chrome]
-  #     runs-on: macos-12
-
-  #     - name: Run install for Microsoft Edge
-  #       run: |
-  #         brew reinstall microsoft-edge
-  #         ls /Applications/
-
-  #     - name: Get Codesign
-  #       run: |
-  #         codesign -d -r - /Applications/Microsoft\ Edge.app > /tmp/Microsoft\ Edge.txt
-  #         cat /tmp/Microsoft\ Edge.txt
-  #         echo "Done"
+      - name: Get Codesign
+        run: |
+          codesign -d -r - /Applications/Microsoft\ Edge.app > /tmp/Microsoft\ Edge.txt
+          cat /tmp/Microsoft\ Edge.txt
+          echo "Done"
 
 
   
