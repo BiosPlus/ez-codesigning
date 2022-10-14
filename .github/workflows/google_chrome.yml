@@ -12,20 +12,19 @@ jobs:
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  # Repository_Clone:
-  #   needs: [Setup]
-  #   runs-on: macos-12
-  #   steps:
-  #     - name: Run install for google chrome
-  #     - run: |
-  #           brew reinstall google-chrome
-  #           ls /Applications/
-
-  #     - name: Get Codesign
-  #     - run: |
-  #         codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
-  #         cat /tmp/Google\ Chrome.txt
-  #         echo "Done"
+  Google-Chrome-Test:
+    needs: [Setup]
+    runs-on: macos-12
+    steps:
+      - name: Run install for google chrome
+      - run: |
+            brew reinstall google-chrome
+            ls /Applications/
+      - name: Get Codesign
+      - run: |
+          codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
+          cat /tmp/Google\ Chrome.txt
+          echo "Done"
 
 
 
