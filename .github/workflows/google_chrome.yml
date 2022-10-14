@@ -17,10 +17,7 @@ jobs:
 
   Google-Chrome-Test:
     needs: [Setup]
-      strategy:
-        matrix:
-          os: [macos-11, macos-12]
-    runs-on: ${{ matrix.os }}
+    runs-on: [macos-12, macos-11]
     steps:
       - name: Run install for google chrome
         run: |
@@ -34,10 +31,7 @@ jobs:
 
   Microsoft-Edge-Test:
     needs: [Google-Chrome-Test]
-      strategy:
-        matrix:
-          os: [macos-11, macos-12]
-    runs-on: ${{ matrix.os }}
+    runs-on: [macos-12, macos-11]
     steps:
       - name: Run install for Microsoft Edge
         run: |
