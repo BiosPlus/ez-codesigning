@@ -4,7 +4,7 @@ jobs:
   Setup:
     runs-on: macos-12
     steps:
-    - name: What arch are we using?
+      - name: What arch are we using?
       - run: sysctl -n machdep.cpu.brand_string
       - name: Install Brew
       - run: |
