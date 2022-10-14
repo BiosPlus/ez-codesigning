@@ -4,26 +4,28 @@ jobs:
   Setup:
     runs-on: macos-12
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
       - name: What arch are we using?
-      - run: sysctl -n machdep.cpu.brand_string
+        run: sysctl -n machdep.cpu.brand_string
       - name: Install Brew
-      - run: |
+        run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  Repository_Clone:
-    needs: [Setup]
-    runs-on: macos-12
-    steps:
-      - name: Run install for google chrome
-      - run: |
-            brew reinstall google-chrome
-            ls /Applications/
+  # Repository_Clone:
+  #   needs: [Setup]
+  #   runs-on: macos-12
+  #   steps:
+  #     - name: Run install for google chrome
+  #     - run: |
+  #           brew reinstall google-chrome
+  #           ls /Applications/
 
-      - name: Get Codesign
-      - run: |
-          codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
-          cat /tmp/Google\ Chrome.txt
-          echo "Done"
+  #     - name: Get Codesign
+  #     - run: |
+  #         codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
+  #         cat /tmp/Google\ Chrome.txt
+  #         echo "Done"
 
 
 
