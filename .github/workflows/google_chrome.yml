@@ -17,11 +17,11 @@ jobs:
     runs-on: macos-12
     steps:
       - name: Run install for google chrome
-      - run: |
+        run: |
             brew reinstall google-chrome
             ls /Applications/
       - name: Get Codesign
-      - run: |
+        run: |
           codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
           cat /tmp/Google\ Chrome.txt
           echo "Done"
