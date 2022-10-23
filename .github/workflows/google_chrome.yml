@@ -48,3 +48,20 @@ jobs:
           codesign -d -r - /Applications/Microsoft\ Edge.app > /tmp/Microsoft\ Edge.txt
           cat /tmp/Microsoft\ Edge.txt
           echo "Done"
+
+  Dialpad-Test:
+    needs: [Google-Chrome-Test, Microsoft-Edge-Test]
+    strategy:
+      matrix:
+        os: [macos-11, macos-12]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Run install for Dialpad
+        run: |
+            brew install --cask dialpad
+            ls /Applications/
+      - name: Get Codesign
+        run: |
+          codesign -d -r - /Applications/Dialpad.app > /tmp/Dialpad.txt
+          cat /tmp/Dialpad.txt
+          echo "Done"
