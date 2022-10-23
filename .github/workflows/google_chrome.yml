@@ -24,7 +24,9 @@ jobs:
             brew reinstall ${{ matrix.app }} > /tmp/brewinstall.txt
             echo "getting brewinstall log"
             cat /tmp/brewinstall.txt
-            ls -ltr /Applications/
+            echo "Grepping brewinstall"
+            grep -r "'\/Applications/.*.app'" /tmp/brewinstall.txt
+            echo "^^^ Thats the app path"
       # - name: Get Codesign
       #   run: |
       #     codesign -d -r - /Applications/* > /tmp/applist.txt
