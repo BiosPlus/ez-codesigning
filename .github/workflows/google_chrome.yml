@@ -23,7 +23,7 @@ jobs:
         app: [google-chrome, microsoft-edge, dialpad]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Run install for ${{ app }}
+      - name: Run install for apps
         run: |
             brew reinstall ${{ app }}
             ls /Applications/
