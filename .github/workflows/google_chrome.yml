@@ -26,12 +26,12 @@ jobs:
       - name: Run install for ${{ matrix.app }}
         run: |
             brew reinstall ${{ matrix.app }}
-            ls /Applications/
-      - name: Get Codesign
-        run: |
-          codesign -d -r - /Applications/* > /tmp/applist.txt
-          cat /tmp/applist.txt
-          echo "Done"
+            ls -ltr /Applications/
+      # - name: Get Codesign
+      #   run: |
+      #     codesign -d -r - /Applications/* > /tmp/applist.txt
+      #     cat /tmp/applist.txt
+      #     echo "Done"
 
   # Microsoft-Edge-Test:
   #   needs: [Google-Chrome-Test]
