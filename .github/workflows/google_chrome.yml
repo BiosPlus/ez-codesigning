@@ -2,10 +2,7 @@ name: Google Chrome
 on: [push]
 jobs:
   Setup:
-    strategy:
-      matrix:
-        os: [macos-12]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-12
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -19,9 +16,8 @@ jobs:
     needs: [Setup]
     strategy:
       matrix:
-        os: [macos-12]
         app: [google-chrome, microsoft-edge, dialpad]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-12
     steps:
       - name: Run install for ${{ matrix.app }}
         run: |
@@ -32,6 +28,10 @@ jobs:
       #     codesign -d -r - /Applications/* > /tmp/applist.txt
       #     cat /tmp/applist.txt
       #     echo "Done"
+      - name: Uninstall ${{ matrix.app }}
+        run: |
+            brew uninstall ${{ matrix.app }}
+            ls -ltr /Applications/
 
   # Microsoft-Edge-Test:
   #   needs: [Google-Chrome-Test]
