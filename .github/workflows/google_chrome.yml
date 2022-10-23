@@ -4,7 +4,7 @@ jobs:
   Setup:
     strategy:
       matrix:
-        os: [macos-11, macos-12]
+        os: [macos-12]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repo
@@ -15,53 +15,54 @@ jobs:
         run: |
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  Google-Chrome-Test:
+  Application-Test:
     needs: [Setup]
     strategy:
       matrix:
-        os: [macos-11, macos-12]
+        os: [macos-12]
+        app: [google-chrome, microsoft-edge, dialpad]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Run install for google chrome
+      - name: Run install for ${{ app }}
         run: |
-            brew reinstall google-chrome
+            brew reinstall ${{ app }}
             ls /Applications/
       - name: Get Codesign
         run: |
-          codesign -d -r - /Applications/Google\ Chrome.app > /tmp/Google\ Chrome.txt
-          cat /tmp/Google\ Chrome.txt
+          codesign -d -r - /Applications/* > /tmp/applist.txt
+          cat /tmp/applist.txt
           echo "Done"
 
-  Microsoft-Edge-Test:
-    needs: [Google-Chrome-Test]
-    strategy:
-      matrix:
-        os: [macos-11, macos-12]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Run install for Microsoft Edge
-        run: |
-            brew reinstall microsoft-edge
-            ls /Applications/
-      - name: Get Codesign
-        run: |
-          codesign -d -r - /Applications/Microsoft\ Edge.app > /tmp/Microsoft\ Edge.txt
-          cat /tmp/Microsoft\ Edge.txt
-          echo "Done"
+  # Microsoft-Edge-Test:
+  #   needs: [Google-Chrome-Test]
+  #   strategy:
+  #     matrix:
+  #       os: [macos-12]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - name: Run install for Microsoft Edge
+  #       run: |
+  #           brew reinstall microsoft-edge
+  #           ls /Applications/
+  #     - name: Get Codesign
+  #       run: |
+  #         codesign -d -r - /Applications/Microsoft\ Edge.app > /tmp/Microsoft\ Edge.txt
+  #         cat /tmp/Microsoft\ Edge.txt
+  #         echo "Done"
 
-  Dialpad-Test:
-    needs: [Google-Chrome-Test, Microsoft-Edge-Test]
-    strategy:
-      matrix:
-        os: [macos-11, macos-12]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Run install for Dialpad
-        run: |
-            brew install --cask dialpad
-            ls /Applications/
-      - name: Get Codesign
-        run: |
-          codesign -d -r - /Applications/Dialpad.app > /tmp/Dialpad.txt
-          cat /tmp/Dialpad.txt
-          echo "Done"
+  # Dialpad-Test:
+  #   needs: [Google-Chrome-Test, Microsoft-Edge-Test]
+  #   strategy:
+  #     matrix:
+  #       os: [macos-12]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - name: Run install for Dialpad
+  #       run: |
+  #           brew install dialpad
+  #           ls /Applications/
+  #     - name: Get Codesign
+  #       run: |
+  #         codesign -d -r - /Applications/Dialpad.app > /tmp/Dialpad.txt
+  #         cat /tmp/Dialpad.txt
+  #         echo "Done"
