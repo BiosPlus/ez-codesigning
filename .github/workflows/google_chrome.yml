@@ -25,8 +25,8 @@ jobs:
             echo "getting brewinstall log"
             cat /tmp/brewinstall.txt
             echo "Grepping brewinstall"
-      #      grep -r "'\/Applications/.*.app'" /tmp/brewinstall.txt
-            grep -E "'\/Applications/.*.app'" /tmp/brewinstall.txt | awk -F" to " '{print $2}'
+            grep -r "'\/Applications/.*.app'" /tmp/brewinstall.txt
+            grep -E 'ad.anynet.id' /Users/%LastConsoleUser%/.anydesk/system.conf | awk -F"ad.anynet.id=" '{print $2}'
             echo "^^^ Thats the app path"
       # - name: Get Codesign
       #   run: |
