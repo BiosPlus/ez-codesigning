@@ -16,7 +16,7 @@ jobs:
     needs: [Setup]
     strategy:
       matrix:
-        app: [google-chrome, microsoft-edge, dialpad]
+        app: [google-chrome, dialpad]
     runs-on: macos-12
     steps:
       - name: Run install for ${{ matrix.app }}
