@@ -22,6 +22,7 @@ jobs:
       - name: Run install for ${{ matrix.app }}
         run: |
             brew reinstall ${{ matrix.app }} > /tmp/brewinstall.txt
+            echo "getting brewinstall log"
             cat /tmp/brewinstall.txt
             ls -ltr /Applications/
       # - name: Get Codesign
