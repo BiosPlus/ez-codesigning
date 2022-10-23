@@ -25,8 +25,10 @@ jobs:
             echo "getting brewinstall log"
             cat /tmp/brewinstall.txt
             echo "Grepping brewinstall"
-            grep -E "'\/Applications/.*.app'" /tmp/brewinstall.txt | awk -F" to " '{print $2}'
+            $${{ matrix.app }}path = grep -E "'\/Applications/.*.app'" /tmp/brewinstall.txt | awk -F" to " '{print $2}'
             echo "^^^ Thats the app path"
+            echo $${{ matrix.app }}path 
+            echo "^^^ That is the var"
       # - name: Get Codesign
       #   run: |
       #     codesign -d -r - /Applications/* > /tmp/applist.txt
