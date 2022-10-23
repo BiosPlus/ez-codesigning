@@ -23,9 +23,9 @@ jobs:
         app: [google-chrome, microsoft-edge, dialpad]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Run install for apps
+      - name: Run install for ${{ matrix.app }}
         run: |
-            brew reinstall ${{ app }}
+            brew reinstall ${{ matrix.app }}
             ls /Applications/
       - name: Get Codesign
         run: |
